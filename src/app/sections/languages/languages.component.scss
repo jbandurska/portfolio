@@ -1,0 +1,66 @@
+.languages {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+
+  .lang {
+    padding: 20px 40px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.4s;
+    cursor: pointer;
+
+    img {
+      width: 130px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .name {
+      font-size: 1.4rem;
+    }
+
+    .level {
+      opacity: 90%;
+    }
+
+    .cert {
+      opacity: 80%;
+      font-size: 0.8rem;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    &:hover {
+      background-color: var(--foreground-color);
+    }
+  }
+  @media (max-width: 800px) {
+    flex-direction: column;
+    gap: 10px;
+
+    .lang {
+      flex-direction: row;
+      gap: 20px;
+      padding: 0 20px;
+
+      img {
+        width: 100px;
+      }
+
+      .info {
+        align-items: flex-start;
+
+        .cert {
+            text-align: left;
+        }
+      }
+    }
+  }
+}
