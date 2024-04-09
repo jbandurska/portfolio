@@ -1,0 +1,64 @@
+.introduction {
+  text-align: center;
+  margin: 0 0 100px;
+
+  p {
+    margin: 20px 0;
+
+    span {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+
+  > :first-child {
+    font-size: 1.3rem;
+
+    span {
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap-reverse;
+  gap: 100px;
+
+  .links {
+    .link {
+      border-radius: 30px;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: var(--foreground-color);
+      }
+
+      a {
+        padding: 20px;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+
+        .icon {
+          width: 2.5rem;
+          aspect-ratio: 1;
+          background-color: var(--text-color);
+        }
+      }
+    }
+  }
+
+  .picture {
+    img {
+      border-radius: 50%;
+      max-height: 250px;
+    }
+  }
+}
