@@ -1,0 +1,40 @@
+:host {
+  width: 100%;
+}
+
+.tile {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.4s;
+
+  .icon {
+    width: 75%;
+    aspect-ratio: 1;
+    background-color: var(--text-color);
+    transition: 0.4s;
+  }
+
+  .title {
+    transition: 0.4s;
+    font-size: 0.9rem;
+  }
+
+  &:hover {
+    background-color: var(--foreground-color);
+
+    .icon {
+      background-color: var(--highlight);
+    }
+
+    .title {
+      color: var(--highlight);
+    }
+  }
+}
