@@ -1,0 +1,31 @@
+<svg [attr.viewBox]="viewBox">
+  <defs>
+    <symbol id="left">
+      <path transform="translate(0 3)" d="M 10 10 C 10 30, 20 30, 30 30" />
+    </symbol>
+    <symbol id="right">
+      <path transform="translate(0 3)" d="M 10 30 C 10 30, 20 30, 30 10" />
+    </symbol>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4158D0" />
+      <stop offset="46%" stop-color="#C850C0" />
+      <stop offset="100%" stop-color="#FFCC70" />
+    </linearGradient>
+  </defs>
+  <style id="styles"></style>
+  <g class="lines">
+    @for (cord of barService.cords; track cord) {
+        @switch (cord.type) {
+            @case ("line") {
+                <line [attr.x1]="cord.x1" [attr.y1]="cord.y1" [attr.x2]="cord.x2" [attr.y2]="cord.y2" />
+            } 
+            @case ("left") {
+                <use href="#left" [attr.transform]="'translate(' + cord.x1 + ' ' + cord.y2 + ')'" />
+            }
+            @case ("right") {
+                <use href="#right" [attr.transform]="'translate(' + cord.x1 + ' ' + cord.y2 + ')'" />
+            }
+        }
+    }
+  </g>
+</svg>

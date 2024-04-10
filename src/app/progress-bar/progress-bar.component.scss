@@ -1,0 +1,28 @@
+line {
+  stroke-width: 6px;
+  stroke: cornflowerblue;
+}
+
+#dot circle {
+  stroke-width: 3px;
+  fill: SteelBlue;
+}
+
+#left path,
+#right path {
+  stroke-width: 6px;
+  fill: none;
+}
+
+svg use {
+  stroke: SteelBlue;
+}
+
+svg {
+    position: absolute;
+    inset: 0;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+    z-index: -1;
+}
