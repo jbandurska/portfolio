@@ -105,7 +105,8 @@ $top: 200px;
   }
 
   .images {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     width: 100%;
   }
 }

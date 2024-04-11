@@ -19,6 +19,7 @@ body {
   margin: 0;
   text-shadow: 0 0 9px var(--background-color), 0 0 6px var(--background-color),
     0 0 3px var(--background-color);
+  overflow-x: hidden;
 }
 
 section {
