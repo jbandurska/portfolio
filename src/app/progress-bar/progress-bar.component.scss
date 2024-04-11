@@ -1,28 +1,29 @@
-line {
-  stroke-width: 6px;
-  stroke: cornflowerblue;
-}
-
-#dot circle {
-  stroke-width: 3px;
-  fill: SteelBlue;
-}
-
-#left path,
-#right path {
-  stroke-width: 6px;
-  fill: none;
-}
-
-svg use {
-  stroke: SteelBlue;
-}
-
 svg {
-    position: absolute;
-    inset: 0;
-    max-width: 1300px;
-    width: 100%;
-    margin: 0 auto;
-    z-index: -1;
+  position: absolute;
+  inset: 0;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  z-index: -1;
+}
+
+path {
+  fill: none;
+  stroke-width: 6px;
+  vector-effect: non-scaling-stroke;
+}
+
+#progressPath,
+#progressPathBlur {
+  stroke: url(#gradient);
+  opacity: 0;
+  stroke-linecap: round;
+}
+
+#progressPathBlur {
+  filter: blur(4px);
+}
+
+#progressPathBg {
+  stroke: var(--foreground-color);
 }

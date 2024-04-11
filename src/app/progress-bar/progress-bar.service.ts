@@ -1,23 +1,15 @@
 import { Injectable } from '@angular/core';
 
-interface Coordinates {
-  x1: number;
-  x2: number;
-  y1: number;
-  y2: number;
-  type: 'line' | 'left' | 'right';
-}
-
 @Injectable({
   providedIn: 'root',
 })
 export class ProgressBarService {
   private _svgWidth = Math.min(window.innerWidth, 1300);
   private _svgHeight = this.calcSvgHeight();
-  private _cords: Coordinates[] = [];
+  private _path = '';
 
-  get cords() {
-    return this._cords;
+  get path() {
+    return this._path;
   }
 
   get svgWidth(): number {
@@ -32,58 +24,90 @@ export class ProgressBarService {
     window.addEventListener('resize', () => {
       this._svgWidth = Math.min(window.innerWidth, 1300);
       this._svgHeight = this.calcSvgHeight();
-
-      this.getSectionsCords();
+      this._path = this.createPath();
     });
 
     window.addEventListener('load', () => {
       this._svgWidth = Math.min(window.innerWidth, 1300);
       this._svgHeight = this.calcSvgHeight();
-
-      this.getSectionsCords();
+      this._path = this.createPath();
     });
   }
 
   private calcSvgHeight(): number {
     const body = document.body;
+    const html = document.documentElement;
 
-    return Math.max(body.scrollHeight, body.offsetHeight);
+    return Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight
+    );
   }
 
-  private getSectionsCords(): void {
+  private createPath(): string {
+    const sectionMargin = 100;
+    const svgMargin = 80;
+
+    let path = '';
+
+    // starting point
+    path += `M ${svgMargin},0`;
+
     const sections = document.querySelectorAll('section');
 
-    this._cords = [];
-
     sections.forEach((section, i) => {
-      console.log(section);
+      const endOfSection = section.offsetTop + section.offsetHeight;
+      const betweenSections = endOfSection + sectionMargin / 2;
 
-      const xCord = i % 2 === 0 ? 100 : this.svgWidth - 100;
-      const xCord2 = !(i % 2 === 0) ? 100 : this.svgWidth - 100;
+      // the line on the left
+      if (i % 2 === 0) {
+        // vertical line
+        path += `L ${svgMargin},${endOfSection}`;
 
-      const cord: Coordinates = {
-        x1: xCord,
-        x2: xCord,
-        y1: section.offsetTop,
-        y2: section.offsetTop + section.offsetHeight,
-        type: 'line',
-      };
+        if (i !== sections.length - 1) {
+          // first turn
+          path += `Q ${svgMargin},${betweenSections} ${
+            svgMargin + sectionMargin / 2
+          },${betweenSections}`;
 
-      const firstTurn: Coordinates = {
-        ...cord,
-        type: i % 2 === 0 ? 'left' : 'right',
-      };
+          // horizontal line
+          path += `L ${
+            this.svgWidth - svgMargin - sectionMargin / 2
+          },${betweenSections}`;
 
-      const secondTurn: Coordinates = {
-        ...cord,
-        x1: xCord2,
-        x2: xCord2,
-        type: !(i % 2 === 0) ? 'left' : 'right',
-      };
+          // second turn
+          path += `Q ${this.svgWidth - svgMargin},${betweenSections} ${
+            this.svgWidth - svgMargin
+          },${endOfSection + sectionMargin}`;
+        }
+      }
+      // the line on the right
+      else {
+        // vertical line
+        path += `L ${this.svgWidth - svgMargin},${endOfSection}`;
 
-      this._cords.push(firstTurn);
-      this._cords.push(cord);
-      this._cords.push(secondTurn);
+        if (i !== sections.length - 1) {
+          // first turn
+          path += `Q ${this.svgWidth - svgMargin},${betweenSections} ${
+            this.svgWidth - svgMargin - sectionMargin / 2
+          },${betweenSections}`;
+
+          // horizontal line
+          path += `L ${svgMargin + sectionMargin / 2},${betweenSections}`;
+
+          // second turn
+          path += `Q ${svgMargin},${betweenSections} ${svgMargin},${
+            endOfSection + sectionMargin
+          }`;
+        }
+      }
     });
+
+    path += `V ${this.svgHeight}`;
+
+    return path;
   }
 }

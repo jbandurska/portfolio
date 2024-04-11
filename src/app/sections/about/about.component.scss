@@ -32,6 +32,7 @@
     .link {
       border-radius: 30px;
       transition: 0.3s;
+      backdrop-filter: blur(10px);
 
       &:hover {
         background-color: var(--foreground-color);

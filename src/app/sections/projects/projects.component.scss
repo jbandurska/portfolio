@@ -31,6 +31,7 @@ $top: 200px;
     display: flex;
     gap: 10px;
     align-items: center;
+    padding: 0 20px;
 
     a {
       .icon {
@@ -77,12 +78,6 @@ $top: 200px;
     }
   }
 
-  @media (max-width: 1300px) {
-    .content {
-      flex-direction: column;
-    }
-  }
-
   @media (max-width: 800px) {
     .images {
       padding-top: 0;
@@ -112,16 +107,6 @@ $top: 200px;
   .images {
     display: flex;
     width: 100%;
-  }
-
-  @media (max-width: 1000px) {
-    .content {
-      flex-direction: column;
-    }
-
-    .images {
-      width: 80%;
-    }
   }
 }
 
@@ -168,7 +153,25 @@ $top: 200px;
 
   @media (max-width: 450px) {
     .project img {
-        width: 100%;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 1300px) {
+  .project.desktop {
+    .content {
+      flex-direction: column;
+    }
+  }
+
+  .project.mobile {
+    .content {
+      flex-direction: column;
+    }
+
+    .images {
+      width: 80%;
     }
   }
 }
